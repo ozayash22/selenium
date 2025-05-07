@@ -11,25 +11,27 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    - name: Set up JDK
-      uses: actions/setup-java@v3
-      with:
-        distribution: 'temurin'
-        java-version: '17'
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
 
-    - name: Install Google Chrome
-      uses: browser-actions/setup-chrome@v1
+      - name: Install Google Chrome
+        uses: browser-actions/setup-chrome@v1
 
-    - name: Set up chromedriver
-      uses: browser-actions/setup-chromedriver@latest
+      - name: Install ChromeDriver
+        uses: browser-actions/setup-chromedriver@v1
 
-    - name: Build and run tests
-      run: mvn test
+      - name: Display Chrome version
+        run: google-chrome --version
 
-    - name: Upload test report
-      uses: actions/upload-artifact@v4
-      with:
-        name: junit-report
-        path: target/surefire-reports/
+      - name: Display ChromeDriver version
+        run: chromedriver --version
+
+      - name: Run Selenium Tests with Maven
+        run: mvn clean test
+
