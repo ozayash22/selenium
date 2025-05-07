@@ -23,9 +23,7 @@ jobs:
       uses: browser-actions/setup-chrome@v1
 
     - name: Set up chromedriver
-      uses: nanasess/setup-chromedriver@v2
-      with:
-        chromedriver-version: 'latest'
+      uses: browser-actions/setup-chrome-and-chromedriver@v1
 
     - name: Build and run tests
       run: mvn test
